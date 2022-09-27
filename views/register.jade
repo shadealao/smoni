@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  
+  div(class="mx-auto pt-5 col-md-4")
+    div(class="card bg-light")
+      div(class="card-body")
+        h4(class="card-title") S'inscrire
+        form(action='/register',method='post')
+          div(class="form-floating mb-3")
+            input(type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com")
+            label(for="floatingInput") Email
+
+          div(class="form-floating mb-3")
+            input(type="password" class="form-control" id="floatingPassword" name="mdp" placeholder="Password")
+            label(for="floatingPassword") Mot de passe
+          div(class="form-floating mb-3")
+            input(type="password" class="form-control" id="floatingPassword2" name="mdp2" placeholder="Password")
+            label(for="floatingPassword") Confirmez le mot de passe
+          
+          div(class="mt-2")
+            a(type="button" href="/login" class="btn btn-secondary mx-2") annuler
+            button(type="submit" class="btn btn-success mx-2") valider
+

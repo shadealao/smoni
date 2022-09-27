@@ -1,0 +1,58 @@
+extends layout
+
+block content
+  div(class="mx-auto pt-5 col-md-7")
+    div(class="card bg-light")
+      div(class="card-body")
+        if action == 'modifier'
+          h4(class="card-title") Modifier les informations de l'utilisateur
+          form(action='/users/'+utilisateur.id, method='POST')
+            div(class="form-floating mb-3")
+              input(type="email" class="form-control" value=utilisateur.email id="email" name="email" placeholder="name@example.com")
+              label(for="email") Email
+            
+            div(class="form-floating mb-3")
+              div(class="form-check form-check-inline")
+                input(class="form-check-input" type="radio" name="role" id="user" value="user" checked=(utilisateur.role === 'user'))
+                label(class="form-check-label" for="user") Utilisateur
+              
+              div(class="form-check form-check-inline")
+                input(class="form-check-input" type="radio" name="role" id="eleve" value="eleve"  checked=(utilisateur.role === 'eleve'))
+                label(class="form-check-label" for="eleve") Elève
+              
+              div(class="form-check form-check-inline")
+                input(class="form-check-input" type="radio" name="role" id="enseignant" value="enseignant"  checked=(utilisateur.role === 'enseignant'))
+                label(class="form-check-label" for="enseignant") Enseignant
+            
+              div(class="form-check form-check-inline")
+                input(class="form-check-input" type="radio" name="role" id="admin" value="admin"  checked=(utilisateur.role === 'admin'))
+                label(class="form-check-label" for="admin") Administrateur
+            
+            div(class="form-check form-switch mb-3")
+              input(class="form-check-input" type="checkbox" id="active" checked=(utilisateur.active))
+              label(class="form-check-label" for="active") Actif
+
+            
+            div(class="mt-2")
+              a(type="button" href='/users#'+ident class="btn btn-secondary mx-2") Annuler
+              button(type="submit" class="btn btn-success mx-2") Modifier
+        else
+          table(class="table table-striped  table-hover")
+            thead(class="table-light")
+              tr 
+                th(scope="col") Email 
+                th(scope="col") Droits 
+                th(scope="col") Actif 
+                th(scope="col")
+
+            each utilisateurs in utilisateur
+              tr 
+                td= utilisateurs.email
+                td= utilisateurs.role
+                td= utilisateurs.active
+                if userid != utilisateurs.id
+                  td(id=utilisateurs.id) 
+                    a(class="btn" aria-current="page" href='/users/'+utilisateurs.id) Modifier
+                else
+                  td
+        

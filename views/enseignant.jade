@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  
+  div(class="mx-auto pt-5 col-md-4")
+    div(class="card bg-light")
+      div(class="card-body")
+        h4(class="card-title") Modifier mes informations
+        form(action='/enseignant/'+userid,method='post')
+          div(class="form-floating mb-3")
+            input(type="text" class="form-control" id="nom" name="nom" placeholder="nom" required value=enseignant.nom)
+            label(for="nom") Nom
+
+          div(class="form-floating mb-3")
+            input(type="text" class="form-control" id="prenom" name="prenom" placeholder="prenom" required value=enseignant.prenom)
+            label(for="prenom") Prénom
+            
+          div(class="form-floating mb-3")
+            input(type="text" class="form-control" id="adresse" name="adresse" placeholder="adresse" required value=enseignant.adresse)
+            label(for="adresse") Adresse
+
+          div(class="form-floating input-group mb-3")
+            span(class="input-group-text") +33
+            input(type="int" class="form-control" id="telephone" name="telephone" placeholder="666666666" required value=enseignant.telephone)
+        
+
+          div(class="mt-2")
+            a(type="button" href="/enseignant" class="btn btn-secondary mx-2") annuler
+            button(type="submit" class="btn btn-success mx-2") valider
+

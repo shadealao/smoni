@@ -1,0 +1,24 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "admin",
+    "database": "smoni",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "gujtmkmtgolhtd",
+    "password": "c01266710171a64c0139494f53f5dd4a28b56d9649a63c45ae0efb39b7311e63",
+    "database": "dcmtrbeb091c8p",
+    "host": "ec2-3-219-52-220.compute-1.amazonaws.com",
+    "dialect": "postgres",
+    "use_env_variable": "DATABASE_URL" 
+  }
+}

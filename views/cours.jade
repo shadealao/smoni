@@ -1,0 +1,94 @@
+extends layout
+
+block content
+  if message 
+    p=message
+  if logged === 'admin' 
+    div(class="mx-auto pt-5 col-md-4")
+      div(class="card bg-light")
+        div(class="card-body")
+          h4(class="card-title") Résserver un cours à un élève
+          form(action='/creneaux',method='post')
+            div(class="form-floating mb-3")
+              input(type="date" class="form-control" id="date" name="date")
+              label(for="date") Date
+
+            div(class="form-floating mb-3")
+              input(type="time" class="form-control" id="debut" name="debut" )
+              label(for="debut") Début
+
+            div(class="form-floating mb-3")
+              input(type="time" class="form-control" id="fin" name="fin")
+              label(for="fin") Fin
+
+            div(class="mt-2")
+              a(type="button" href="/creneaux" class="btn btn-secondary mx-2") annuler
+              button(type="submit" class="btn btn-success mx-2") valider
+
+
+  if logged === 'eleve' 
+    if formulaire 
+      div(class="mx-auto pt-3 col-md-10")
+        div(class="card bg-light")
+          div(class="card-body")
+            h4(class="card-title text-center") Réserver un cours
+            form(action='/cours',method='post')
+              table(class="table table-striped  table-hover")
+                thead(class="table-light")
+                  tr 
+                    th(scope="col") Cours 
+                    th(scope="col") Enseignant disponible
+                    th
+                
+                tr 
+                  td
+                    input(name="creneau" type="hidden" value=creneau.id)
+                    span   Le    
+                    span= creneau.date   
+                    span   de   
+                    span= creneau.debut   
+                    span   à 
+                    span= creneau.fin
+                  td
+                    select#listeenseignant(name="listeenseignant"  class="form-select")
+                      each enseignant in enseignants 
+                        option(value=enseignant.id)
+                          span= enseignant.prenom 
+                          span       
+                          span= enseignant.nom     
+
+                  td
+                    
+                    
+                    button(type="submit" class="btn btn-success mx-2") Valider
+      
+
+    div(class="mx-auto pt-3 col-md-10")
+      div(class="card bg-light")
+        div(class="card-body")
+          h4(class="card-title text-center") Mes cours
+            table(class="table table-striped  table-hover")
+              thead(class="table-light")
+                tr 
+                  th(scope="col") Cours 
+                  th(scope="col") Enseignant 
+                  th
+              each cours in cours1 
+                tr 
+                  td
+                    span   Le    
+                    span= cours.date   
+                    span   de   
+                    span= cours.debut   
+                    span   à 
+                    span= cours.fin
+                  td
+                    span= cours.nom
+                    span 
+                    span= cours.prenom
+                  td
+                    if cours.Realise
+                      span Réalisé
+                    else
+                      span Non réalisé
+                  

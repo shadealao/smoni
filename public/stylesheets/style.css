@@ -1,0 +1,28 @@
+html {
+  padding: 0px;
+  margin: 0px;
+}
+body {
+  padding: 0px;
+  margin: 0px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+h1 {
+  color: red;
+}
+
+.tetepage {
+  height: 8vh;
+}
+.contenupage {
+  height: 84vh;
+  overflow-y: auto;
+
+}
+.piedpage {
+  height: 6vh;
+}

@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  div(class="mx-auto pt-3 col-md-10")
+    div(class="card bg-light")
+      div(class="card-body")
+        h4(class="card-title text-center") Liste des produits
+        table(class="table table-striped  table-hover")
+          thead(class="table-light")
+            tr 
+             th(scope="col") Quantité 
+              th(scope="col") Produit
+              th(scope="col") Prix
+              th(scope="col")
+          tbody
+            each produits in produit
+              tr 
+                td= produits.occurrence
+                td= produits.value.nom
+                td= produits.occurrence * produits.value.prix
+          tfoot 
+            tr 
+              th(scope="row") Total 
+              td= total
+                
+
+block script
+  script
+    include ../public/javascripts/produit.js

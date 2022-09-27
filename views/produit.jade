@@ -1,0 +1,53 @@
+extends layout
+
+block content
+
+  if logged === 'admin'
+    div(class="mx-auto pt-5 col-md-4")
+      div(class="card bg-light")
+        div(class="card-body")
+          h4(class="card-title") Ajouter un nouveau produit
+          form(action='/produit',method='post')
+            div(class="form-floating mb-3")
+              input(type="text" class="form-control" id="nom" name="nom" placeholder="Nom produit")
+              label(for="nom") Nom
+
+            div(class="form-floating mb-3")
+              input(type="int" class="form-control" id="prix" name="prix" placeholder="0€")
+              label(for="prix") Prix
+            div(class="form-floating mb-3")
+              input(type="text" class="form-control" id="description" name="description" placeholder="description produit")
+              label(for="description") Description
+            
+            div(class="mt-2")
+              a(type="button" href="/produit" class="btn btn-secondary mx-2") annuler
+              button(type="submit" class="btn btn-success mx-2") valider
+
+  div(class="mx-auto pt-3 col-md-10")
+    div(class="card bg-light")
+      div(class="card-body")
+        h4(class="card-title text-center") Liste des produits
+        table(class="table table-striped  table-hover")
+          thead(class="table-light")
+            tr 
+              th(scope="col") Nom 
+              th(scope="col") Prix € TTC 
+              th(scope="col") Description 
+              th(scope="col")
+          each produits in produit
+            tr 
+              td= produits.nom
+              td= produits.prix
+              td= produits.description
+              td 
+                if logged === 'admin'
+                  a(class="btn" aria-current="page" href='/produits/'+produits.id) Modifier
+                else if logged === 'eleve'
+                  a(class="btn" aria-current="page" href='/produit/panier/'+produits.id) Ajouter au panier
+
+
+
+
+block script
+  script
+    include ../public/javascripts/produit.js

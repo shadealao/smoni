@@ -1,0 +1,58 @@
+extends layout
+
+block content
+  if logged === 'admin'
+    div(class="mx-auto pt-5 col-md-4")
+      div(class="card bg-light")
+        div(class="card-body")
+          h4(class="card-title") Ajouter une nouvelle disponibilité
+          form(action='/creneaux',method='post')
+            div(class="form-floating mb-3")
+              input(type="date" class="form-control" id="date" name="date")
+              label(for="date") Date
+
+            div(class="form-floating mb-3")
+              input(type="time" class="form-control" id="debut" name="debut" )
+              label(for="debut") Début
+
+            div(class="form-floating mb-3")
+              input(type="time" class="form-control" id="fin" name="fin")
+              label(for="fin") Fin
+
+            div(class="mt-2")
+              a(type="button" href="/creneaux" class="btn btn-secondary mx-2") annuler
+              button(type="submit" class="btn btn-success mx-2") valider
+
+
+  div(class="mx-auto pt-3 col-md-10")
+    div(class="card bg-light")
+      div(class="card-body")
+        h4(class="card-title text-center") Liste des créneaux
+          table(class="table table-striped  table-hover")
+            thead(class="table-light")
+              tr 
+                th(scope="col") Date 
+                th(scope="col") De 
+                th(scope="col") A 
+                th(scope="col") Etat 
+                th
+            each creneau in creneaux
+              tr 
+                td= creneau.date
+                td= creneau.debut
+                td= creneau.fin
+                if creneau.active
+                  td
+                    span(class="badge bg-success") Libre
+                  td 
+                    if logged === 'admin'
+                      a(class="btn" aria-current="page" href='/creneaux/'+creneaux.id) Modifier
+                      a(class="btn" aria-current="page" href='/creneaux/'+creneaux.id) Réserver pour un étudiant 
+                    if logged === 'eleve'
+                      a(class="btn" aria-current="page" href='/cours/'+userid+'?idcreneau='+creneau.id) Réserver 
+                    
+                else 
+                  td
+                    span(class="badge bg-danger") Réservé
+                  td
+                
